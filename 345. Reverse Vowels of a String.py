@@ -34,8 +34,6 @@ Constraints:
 s consist of printable ASCII characters.
 """
 
-from copy import deepcopy
-
 
 class Solution(object):
     def reverseVowels(self, s):
