@@ -45,17 +45,16 @@ class Solution(object):
         :rtype: List[int]
         """
         ans = []
-        prefix = [1]
-        suffix = [1]
+        prefix = 1
+        suffix = 1
+        ans.append(prefix)
         for i in range(1, len(nums)):
-            prefix.append(nums[i - 1] * prefix[i - 1])
+            prefix *= nums[i - 1]
+            ans.append(prefix)
 
-        for i in range(len(nums) - 1, 0, -1):
-            suffix.insert(0, nums[i] * suffix[0])
-
-        for i in range(len(nums)):
-            ans.append(prefix[i] * suffix[i])
-
+        for i in range(len(nums) - 1, -1, -1):
+            ans[i] = ans[i] * suffix
+            suffix *= nums[i]
         print(ans)
         return ans
 
@@ -64,10 +63,3 @@ sol = Solution()
 
 sol.productExceptSelf([1, 2, 3, 4])
 sol.productExceptSelf([-1, 1, 0, -3, 3])
-
-"""
-1 2 3 4 5
-
-(1x2) 3 (4x5)
-
-"""
